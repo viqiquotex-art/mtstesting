@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestasi - MTs Safinatul Jabal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, #0d5f2f 100%);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .content-section {
+            padding: 60px 20px;
+            background-color: var(--white);
+        }
+
+        .content-section h2 {
+            color: var(--primary-green);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary-green);
+            padding-bottom: 15px;
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .achievement-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--primary-yellow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-yellow), var(--primary-green));
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .achievement-icon {
+            font-size: 2.5rem;
+            color: var(--primary-yellow);
+            margin-bottom: 15px;
+        }
+
+        .achievement-title {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .achievement-category {
+            display: inline-block;
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .achievement-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .achievement-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .achievement-year {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .achievement-level {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary-green) 0%, #0d5f2f 100%);
+            color: var(--white);
+            padding: 50px 30px;
+            border-radius: 10px;
+            margin-bottom: 50px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-yellow);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .achievement-level-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .level-internasional {
+            background-color: #ffd700;
+            color: #333;
+        }
+
+        .level-nasional {
+            background-color: #ff6b6b;
+            color: white;
+        }
+
+        .level-provinsi {
+            background-color: #4facfe;
+            color: white;
+        }
+
+        .level-kabupaten {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .category-tab {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            border: 2px solid var(--primary-green);
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .category-tab:hover,
+        .category-tab.active {
+            background-color: var(--primary-green);
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="../assets/logo.png" alt="Logo MTs" class="logo-img">
+                <span class="school-name">SIM MTs Safinatul Jabal</span>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="../index.html">Beranda</a></li>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="berita.html">Berita</a></li>
+                <li><a href="pengumuman.html">Pengumuman</a></li>
+                <li><a href="ppdb.html">PPDB</a></li>
+                <li><a href="galeri.html">Galeri</a></li>
+                <li><a href="prestasi.html" class="active">Prestasi</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+                <li><a href="login.html" class="btn-login">Login</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Prestasi Siswa</h1>
+        <p>Pencapaian dan Penghargaan MTs Safinatul Jabal</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <section class="content-section">
+            <!-- Statistics -->
+            <div class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">45+</div>
+                        <div class="stat-label">Prestasi Diraih</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Tingkat Internasional</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Tingkat Nasional</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">30+</div>
+                        <div class="stat-label">Tingkat Lokal</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2><i class="fas fa-trophy"></i> Penghargaan & Prestasi</h2>
+
+            <!-- Category Tabs -->
+            <div class="category-tabs">
+                <button class="category-tab active" onclick="filterAchievement('semua')">Semua</button>
+                <button class="category-tab" onclick="filterAchievement('akademik')">Akademik</button>
+                <button class="category-tab" onclick="filterAchievement('olahraga')">Olahraga</button>
+                <button class="category-tab" onclick="filterAchievement('seni')">Seni & Budaya</button>
+            </div>
+
+            <!-- Achievement Grid -->
+            <div class="achievement-grid" id="achievementGrid">
+                <!-- Prestasi Akademik 1 -->
+                <div class="achievement-card" data-category="akademik">
+                    <i class="fas fa-medal achievement-icon"></i>
+                    <span class="achievement-level-badge level-nasional">NASIONAL</span>
+                    <h3 class="achievement-title">Medali Emas OSN Matematika</h3>
+                    <span class="achievement-category">Akademik</span>
+                    <p class="achievement-description">Siswa MTs Safinatul Jabal meraih medali emas dalam Olimpiade Sains Nasional (OSN) tingkat Nasional untuk kategori Matematika.</p>
+                    <div class="achievement-details">
+                        <span class="achievement-year"><i class="fas fa-calendar-alt"></i> 2023</span>
+                        <span class="achievement-level"><i class="fas fa-star"></i> Nasional</span>
+                    </div>
+                </div>
+
+                <!-- Prestasi Akademik 2 -->
+                <div class="achievement-card" data-category="akademik">
+                    <i class="fas fa-medal achievement-icon"></i>
+                    <span class="achievement-level-badge level-provinsi">PROVINSI</span>
+                    <h3 class="achievement-title">Juara OSN IPA Tingkat Provinsi</h3>
+                    <span class="achievement-category">Akademik</span>
+                    <p class="achievement-description">Tim IPA sekolah meraih juara pertama dalam OSN tingkat Provinsi Jawa Tengah dengan skor sempurna.</p>
+                    <div class="achievement-details">
+                        <span class="achievement-year"><i class="fas fa-calendar-alt"></i> 2024</span>
+                        <span class="achievement-level"><i class="fas fa-star"></i> Provinsi</span>
+                    </div>
+                </div>
+
+                <!-- Prestasi Akademik 3 -->
+                <div class="achievement-card" data-category="akademik">
+                    <i class="fas fa-medal achievement-icon"></i>
+                    <span class="achievement-level-badge level-kabupaten">KABUPATEN</span>
+                    <h3 class="achievement-title">Juara Kompetensi Sains Madrasah</h3>
+                    <span class="achievement-category">Akademik</span>
+                    <p class="achievement-description">Sekolah meraih juara umum dalam Kompetensi Sains Madrasah tingkat Kabupaten Temanggung.</p>
+                    <div class="achievement-details">
+                        <span class="achievement-year"><i class="fas fa-calendar-alt"></i> 2024</span>
+                        <span class="achievement-level"><i class="fas fa-star"></i> Kabupaten</span>
+                    </div>
+                </div>
+
+                <!-- Prestasi Olahraga 1 -->
+                <div class="achievement-card" data-category="olahraga">
+                    <i class="fas fa-volleyball-ball achievement-icon"></i>
+                    <span class="achievement-level-badge level-provinsi">PROVINSI</span>
+                    <h3 class="achievement-title">Juara Bola Voli Putri</h3>
+                    <span class="achievement-category">Olahraga</span>
+                    <p class="achievement-description">Tim bola voli putri menjuarai turnamen antar SMP/MTs tingkat Provinsi Jawa Tengah tahun 2024.</p>
+                    <div class="achievement-details">
+                        <span class="achievement-year"><i class="fas fa-calendar-alt"></i> 2024</span>
+                        <span class="achievement-level"><i class="fas fa-star"></i> Provinsi</span>
+                    </div>
+                </div>
+
+                <!-- Prestasi Olahraga 2 -->
+                <div class="achievement-card" data-category="olahraga">
+                    <i class="fas fa-futbol achievement-icon"></i>
+                    <span class="achievement-level-badge level-kabupaten">KABUPATEN</span>
+                    <h3 class="achievement-title">Juara Futsal Putra</h3>
+                    <span class="achievement-category">Olahraga</span>
+                    <p class="achievement-description">Tim futsal putra berhasil menjadi juara dalam kompetisi futsal tingkat SMP/MTs Se-Kabupaten Temanggung.</p>
+                    <div class="achievement-details">
+                        <span class="achievement-year"><i class="fas fa-calendar-alt"></i> 2024</span>
+                        <span class="achievement-level"><i class="fas fa-star"></i> Kabupaten</span>
+                    </div>
+                </div>
+
+                <!-- Prestasi Olahraga 3 -->
+                <div class="achievement-card" data-category="olahraga">
+                    <i class="fas fa-running achievement-icon"></i>
+                    <span class="achievement-level-badge level-kabupaten">KABUPATEN</span>
+                    <h3 class="achievement-title">Medali Atletik Jarak Jauh</h3>
+                    <span class="achievement-category">Olahraga</span>
+                    <p class="achievement-description">Siswa MTs Safinatul Jabal meraih medali perunggu dalam cabang atletik lari 800m tingkat Kabupaten.</p>
+                    <div class="achievement-details">
+                        <span class="achievement-year"><i class="fas fa-calendar-alt"></i> 2023</span>
+                        <span class="achievement-level"><i class="fas fa-star"></i> Kabupaten</span>
+                    </div>
+                </div>
+
+                <!-- Prestasi Seni 1 -->
+                <div class="achievement-card" data-category="seni">
+                    <i class="fas fa-music achievement-icon"></i>
+                    <span class="achievement-level-badge level-provinsi">PROVINSI</span>
+                    <h3 class="achievement-title">Juara Paduan Suara</h3>
+                    <span class="achievement-category">Seni & Budaya</span>
+                    <p class="achievement-description">Paduan suara MTs Safinatul Jabal menjadi juara pertama dalam Festival Paduan Suara Madrasah tingkat Provinsi.</p>
+                    <div class="achievement-details">
+                        <span class="achievement-year"><i class="fas fa-calendar-alt"></i> 2024</span>
+                        <span class="achievement-level"><i class="fas fa-star"></i> Provinsi</span>
+                    </div>
+                </div>
+
+                <!-- Prestasi Seni 2 -->
+                <div class="achievement-card" data-category="seni">
+                    <i class="fas fa-paint-brush achievement-icon"></i>
+                    <span class="achievement-level-badge level-kabupaten">KABUPATEN</span>
+                    <h3 class="achievement-title">Juara Lukis & Desain</h3>
+                    <span class="achievement-category">Seni & Budaya</span>
+                    <p class="achievement-description">Siswa meraih juara dalam kategori seni lukis dan desain grafis pada kompetisi seni tingkat kabupaten.</p>
+                    <div class="achievement-details">
+                        <span class="achievement-year"><i class="fas fa-calendar-alt"></i> 2024</span>
+                        <span class="achievement-level"><i class="fas fa-star"></i> Kabupaten</span>
+                    </div>
+                </div>
+
+                <!-- Prestasi Seni 3 -->
+                <div class="achievement-card" data-category="seni">
+                    <i class="fas fa-theater-masks achievement-icon"></i>
+                    <span class="achievement-level-badge level-kabupaten">KABUPATEN</span>
+                    <h3 class="achievement-title">Juara Teater & Drama</h3>
+                    <span class="achievement-category">Seni & Budaya</span>
+                    <p class="achievement-description">Klub teater sekolah memenangkan kompetisi drama dan teater untuk kategori SMP/MTs tingkat Kabupaten Temanggung.</p>
+                    <div class="achievement-details">
+                        <span class="achievement-year"><i class="fas fa-calendar-alt"></i> 2023</span>
+                        <span class="achievement-level"><i class="fas fa-star"></i> Kabupaten</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MTs Safinatul Jabal</h3>
+                    <p>Madrasah Tsanawiyah dengan komitmen memberikan pendidikan berkualitas berbasis nilai Islam</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Menu Cepat</h3>
+                    <ul>
+                        <li><a href="profil.html">Profil</a></li>
+                        <li><a href="ppdb.html">PPDB</a></li>
+                        <li><a href="kontak.html">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Kontak Kami</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> JL. Kampung Baru Gondang, Kec. Tretep, Kab. Temanggung, Jawa Tengah</p>
+                    <p><i class="fas fa-id-card"></i> NPSN: 20364493</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MTs Safinatul Jabal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        function filterAchievement(category) {
+            const cards = document.querySelectorAll('.achievement-card');
+            const tabs = document.querySelectorAll('.category-tab');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                if (category === 'semua' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
