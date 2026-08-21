@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri - MTs Safinatul Jabal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, #0d5f2f 100%);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .content-section {
+            padding: 60px 20px;
+            background-color: var(--white);
+        }
+
+        .content-section h2 {
+            color: var(--primary-green);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary-green);
+            padding-bottom: 15px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            border: 2px solid var(--primary-green);
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--primary-green);
+            color: var(--white);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-item {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-info {
+            padding: 20px;
+        }
+
+        .gallery-category {
+            display: inline-block;
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .gallery-title {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .gallery-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .gallery-date {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            position: relative;
+            background: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+            background: var(--white);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background-color: var(--primary-green);
+            color: var(--white);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+
+        .modal-text {
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="../assets/logo.png" alt="Logo MTs" class="logo-img">
+                <span class="school-name">SIM MTs Safinatul Jabal</span>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="../index.html">Beranda</a></li>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="berita.html">Berita</a></li>
+                <li><a href="pengumuman.html">Pengumuman</a></li>
+                <li><a href="ppdb.html">PPDB</a></li>
+                <li><a href="galeri.html" class="active">Galeri</a></li>
+                <li><a href="prestasi.html">Prestasi</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+                <li><a href="login.html" class="btn-login">Login</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Galeri Sekolah</h1>
+        <p>Dokumentasi kegiatan dan fasilitas MTs Safinatul Jabal</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <section class="content-section">
+            <h2><i class="fas fa-images"></i> Foto Kegiatan Sekolah</h2>
+
+            <!-- Filter Buttons -->
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterGallery('semua')">Semua</button>
+                <button class="filter-btn" onclick="filterGallery('akademik')">Akademik</button>
+                <button class="filter-btn" onclick="filterGallery('ekstrakurikuler')">Ekstrakurikuler</button>
+                <button class="filter-btn" onclick="filterGallery('fasilitas')">Fasilitas</button>
+                <button class="filter-btn" onclick="filterGallery('event')">Event</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Akademik 1 -->
+                <div class="gallery-item" data-category="akademik" onclick="openModal(this)">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='250'%3E%3Crect fill='%231db954' width='280' height='250'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='white' text-anchor='middle' dy='.3em'%3EKegiatan Belajar Mengajar%3C/text%3E%3C/svg%3E" alt="Kegiatan Belajar" class="gallery-image">
+                    <div class="gallery-info">
+                        <span class="gallery-category">Akademik</span>
+                        <h3 class="gallery-title">Proses Belajar Mengajar</h3>
+                        <p class="gallery-description">Siswa-siswi MTs Safinatul Jabal mengikuti proses pembelajaran dengan antusias di kelas.</p>
+                        <span class="gallery-date"><i class="fas fa-calendar-alt"></i> 15 Agustus 2024</span>
+                    </div>
+                </div>
+
+                <!-- Akademik 2 -->
+                <div class="gallery-item" data-category="akademik" onclick="openModal(this)">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='250'%3E%3Crect fill='%230d5f2f' width='280' height='250'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='white' text-anchor='middle' dy='.3em'%3ELaboratorium Sains%3C/text%3E%3C/svg%3E" alt="Lab Sains" class="gallery-image">
+                    <div class="gallery-info">
+                        <span class="gallery-category">Akademik</span>
+                        <h3 class="gallery-title">Praktikum Laboratorium</h3>
+                        <p class="gallery-description">Siswa melakukan praktikum IPA di laboratorium sekolah dengan bimbingan guru.</p>
+                        <span class="gallery-date"><i class="fas fa-calendar-alt"></i> 12 Agustus 2024</span>
+                    </div>
+                </div>
+
+                <!-- Ekstrakurikuler 1 -->
+                <div class="gallery-item" data-category="ekstrakurikuler" onclick="openModal(this)">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='250'%3E%3Crect fill='%23ffd700' width='280' height='250'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='%23333' text-anchor='middle' dy='.3em'%3EPala Bola Voli%3C/text%3E%3C/svg%3E" alt="Voli" class="gallery-image">
+                    <div class="gallery-info">
+                        <span class="gallery-category">Ekstrakurikuler</span>
+                        <h3 class="gallery-title">Latihan Bola Voli</h3>
+                        <p class="gallery-description">Tim bola voli sekolah melakukan latihan rutin untuk persiapan kompetisi antar sekolah.</p>
+                        <span class="gallery-date"><i class="fas fa-calendar-alt"></i> 18 Agustus 2024</span>
+                    </div>
+                </div>
+
+                <!-- Ekstrakurikuler 2 -->
+                <div class="gallery-item" data-category="ekstrakurikuler" onclick="openModal(this)">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='250'%3E%3Crect fill='%234facfe' width='280' height='250'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='white' text-anchor='middle' dy='.3em'%3EPaduaan Suara%3C/text%3E%3C/svg%3E" alt="Paduan Suara" class="gallery-image">
+                    <div class="gallery-info">
+                        <span class="gallery-category">Ekstrakurikuler</span>
+                        <h3 class="gallery-title">Paduan Suara Sekolah</h3>
+                        <p class="gallery-description">Grup paduan suara sekolah tampil dalam berbagai acara dan perlombaan.</p>
+                        <span class="gallery-date"><i class="fas fa-calendar-alt"></i> 10 Agustus 2024</span>
+                    </div>
+                </div>
+
+                <!-- Fasilitas 1 -->
+                <div class="gallery-item" data-category="fasilitas" onclick="openModal(this)">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='250'%3E%3Crect fill='%23667eea' width='280' height='250'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='white' text-anchor='middle' dy='.3em'%3EPerpustakaan%3C/text%3E%3C/svg%3E" alt="Perpustakaan" class="gallery-image">
+                    <div class="gallery-info">
+                        <span class="gallery-category">Fasilitas</span>
+                        <h3 class="gallery-title">Perpustakaan Sekolah</h3>
+                        <p class="gallery-description">Perpustakaan dilengkapi dengan koleksi buku dan fasilitas digital modern.</p>
+                        <span class="gallery-date"><i class="fas fa-calendar-alt"></i> 08 Agustus 2024</span>
+                    </div>
+                </div>
+
+                <!-- Fasilitas 2 -->
+                <div class="gallery-item" data-category="fasilitas" onclick="openModal(this)">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='250'%3E%3Crect fill='%23764ba2' width='280' height='250'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='white' text-anchor='middle' dy='.3em'%3EMasjid%3C/text%3E%3C/svg%3E" alt="Masjid" class="gallery-image">
+                    <div class="gallery-info">
+                        <span class="gallery-category">Fasilitas</span>
+                        <h3 class="gallery-title">Masjid Sekolah</h3>
+                        <p class="gallery-description">Masjid yang bersih dan nyaman untuk kegiatan ibadah seluruh civitas akademik.</p>
+                        <span class="gallery-date"><i class="fas fa-calendar-alt"></i> 05 Agustus 2024</span>
+                    </div>
+                </div>
+
+                <!-- Event 1 -->
+                <div class="gallery-item" data-category="event" onclick="openModal(this)">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='250'%3E%3Crect fill='%23f093fb' width='280' height='250'/%3E%3Ctext x='50%25' y='50%25' font-size='18' fill='white' text-anchor='middle' dy='.3em'%3EPembukaan Tahun Ajaran%3C/text%3E%3C/svg%3E" alt="Pembukaan" class="gallery-image">
+                    <div class="gallery-info">
+                        <span class="gallery-category">Event</span>
+                        <h3 class="gallery-title">Pembukaan Tahun Ajaran</h3>
+                        <p class="gallery-description">Acara pembukaan tahun ajaran 2024/2025 dihadiri seluruh siswa, guru, dan orang tua.</p>
+                        <span class="gallery-date"><i class="fas fa-calendar-alt"></i> 01 Agustus 2024</span>
+                    </div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="gallery-item" data-category="event" onclick="openModal(this)">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='250'%3E%3Crect fill='%23f5576c' width='280' height='250'/%3E%3Ctext x='50%25' y='50%25' font-size='18' fill='white' text-anchor='middle' dy='.3em'%3EPeringatan Hari Jadi%3C/text%3E%3C/svg%3E" alt="Hari Jadi" class="gallery-image">
+                    <div class="gallery-info">
+                        <span class="gallery-category">Event</span>
+                        <h3 class="gallery-title">Peringatan Hari Jadi Sekolah</h3>
+                        <p class="gallery-description">Perayaan hari jadi sekolah dengan berbagai kegiatan yang meriah dan penuh kebersamaan.</p>
+                        <span class="gallery-date"><i class="fas fa-calendar-alt"></i> 20 Juni 2024</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="photoModal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <p class="modal-text" id="modalDescription"></p>
+            <span class="gallery-date" id="modalDate"></span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MTs Safinatul Jabal</h3>
+                    <p>Madrasah Tsanawiyah dengan komitmen memberikan pendidikan berkualitas berbasis nilai Islam</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Menu Cepat</h3>
+                    <ul>
+                        <li><a href="profil.html">Profil</a></li>
+                        <li><a href="ppdb.html">PPDB</a></li>
+                        <li><a href="kontak.html">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Kontak Kami</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> JL. Kampung Baru Gondang, Kec. Tretep, Kab. Temanggung, Jawa Tengah</p>
+                    <p><i class="fas fa-id-card"></i> NPSN: 20364493</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MTs Safinatul Jabal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            items.forEach(item => {
+                if (category === 'semua' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function openModal(element) {
+            const modal = document.getElementById('photoModal');
+            const image = element.querySelector('.gallery-image');
+            const title = element.querySelector('.gallery-title').textContent;
+            const description = element.querySelector('.gallery-description').textContent;
+            const date = element.querySelector('.gallery-date').textContent;
+            
+            document.getElementById('modalImage').src = image.src;
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('modalDate').textContent = date;
+            
+            modal.classList.add('active');
+        }
+
+        function closeModal(event) {
+            if (event && event.target.id !== 'photoModal') return;
+            document.getElementById('photoModal').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
