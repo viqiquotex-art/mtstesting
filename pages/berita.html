@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berita - MTs Safinatul Jabal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, #0d5f2f 100%);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .content-section {
+            padding: 60px 20px;
+            background-color: var(--white);
+        }
+
+        .content-section h2 {
+            color: var(--primary-green);
+            font-size: 2rem;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--primary-green);
+            padding-bottom: 15px;
+        }
+
+        .news-list {
+            display: grid;
+            gap: 30px;
+        }
+
+        .news-item {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .news-thumbnail {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .news-detail {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .news-date {
+            display: inline-block;
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            width: fit-content;
+        }
+
+        .news-title {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .news-excerpt {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .news-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .news-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .read-more {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            display: inline-block;
+        }
+
+        .read-more:hover {
+            color: #0d5f2f;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .news-item {
+                grid-template-columns: 1fr;
+            }
+
+            .news-thumbnail {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="../assets/logo.png" alt="Logo MTs" class="logo-img">
+                <span class="school-name">SIM MTs Safinatul Jabal</span>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="../index.html">Beranda</a></li>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="berita.html" class="active">Berita</a></li>
+                <li><a href="pengumuman.html">Pengumuman</a></li>
+                <li><a href="ppdb.html">PPDB</a></li>
+                <li><a href="galeri.html">Galeri</a></li>
+                <li><a href="prestasi.html">Prestasi</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+                <li><a href="login.html" class="btn-login">Login</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Berita & Informasi</h1>
+        <p>Update terbaru dari MTs Safinatul Jabal</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <section class="content-section">
+            <h2><i class="fas fa-newspaper"></i> Berita Terbaru</h2>
+            
+            <div class="news-list">
+                <!-- Berita 1 -->
+                <article class="news-item">
+                    <div class="news-thumbnail" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                    <div class="news-detail">
+                        <div>
+                            <span class="news-date"><i class="fas fa-calendar-alt"></i> 21 Agustus 2024</span>
+                            <h3 class="news-title">Pengumuman Penerimaan Siswa Baru 2024/2025</h3>
+                            <div class="news-meta">
+                                <span><i class="fas fa-user"></i> Admin</span>
+                                <span><i class="fas fa-folder"></i> Pengumuman</span>
+                            </div>
+                            <p class="news-excerpt">Pendaftaran siswa baru untuk tahun ajaran 2024/2025 telah dibuka resmi. Calon siswa dapat mendaftar melalui website resmi atau langsung ke kantor sekolah. Persyaratan lengkap dan formulir pendaftaran tersedia di halaman PPDB.</p>
+                        </div>
+                        <a href="#" class="read-more">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Berita 2 -->
+                <article class="news-item">
+                    <div class="news-thumbnail" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                    <div class="news-detail">
+                        <div>
+                            <span class="news-date"><i class="fas fa-calendar-alt"></i> 15 Agustus 2024</span>
+                            <h3 class="news-title">Prestasi Gemilang: Medali Emas di OSN Tingkat Provinsi</h3>
+                            <div class="news-meta">
+                                <span><i class="fas fa-user"></i> Admin</span>
+                                <span><i class="fas fa-folder"></i> Prestasi</span>
+                            </div>
+                            <p class="news-excerpt">Selamat! Siswa MTs Safinatul Jabal meraih medali emas dalam kompetisi Olimpiade Sains Nasional (OSN) tingkat Provinsi Jawa Tengah. Prestasi ini merupakan hasil dari kerja keras dan dedikasi siswa serta bimbingan dari guru-guru kami.</p>
+                        </div>
+                        <a href="#" class="read-more">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Berita 3 -->
+                <article class="news-item">
+                    <div class="news-thumbnail" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                    <div class="news-detail">
+                        <div>
+                            <span class="news-date"><i class="fas fa-calendar-alt"></i> 10 Agustus 2024</span>
+                            <h3 class="news-title">Kegiatan Ekstrakurikuler Tahun Ajaran 2024/2025 Dimulai</h3>
+                            <div class="news-meta">
+                                <span><i class="fas fa-user"></i> Admin</span>
+                                <span><i class="fas fa-folder"></i> Kegiatan</span>
+                            </div>
+                            <p class="news-excerpt">Berbagai kegiatan ekstrakurikuler telah dimulai untuk tahun ajaran 2024/2025. Siswa dapat memilih berbagai ekstrakurikuler sesuai minat dan bakat mereka, mulai dari olahraga, seni, hingga akademik.</p>
+                        </div>
+                        <a href="#" class="read-more">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Berita 4 -->
+                <article class="news-item">
+                    <div class="news-thumbnail" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+                    <div class="news-detail">
+                        <div>
+                            <span class="news-date"><i class="fas fa-calendar-alt"></i> 05 Agustus 2024</span>
+                            <h3 class="news-title">Pembukaan Tahun Ajaran Baru 2024/2025</h3>
+                            <div class="news-meta">
+                                <span><i class="fas fa-user"></i> Admin</span>
+                                <span><i class="fas fa-folder"></i> Acara</span>
+                            </div>
+                            <p class="news-excerpt">Pembukaan tahun ajaran baru 2024/2025 telah dilaksanakan dengan meriah dengan dihadiri oleh seluruh siswa, guru, orang tua, dan tamu undangan. Acara dibuka langsung oleh Kepala Sekolah dan Ketua Yayasan.</p>
+                        </div>
+                        <a href="#" class="read-more">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MTs Safinatul Jabal</h3>
+                    <p>Madrasah Tsanawiyah dengan komitmen memberikan pendidikan berkualitas berbasis nilai Islam</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Menu Cepat</h3>
+                    <ul>
+                        <li><a href="profil.html">Profil</a></li>
+                        <li><a href="ppdb.html">PPDB</a></li>
+                        <li><a href="kontak.html">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Kontak Kami</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> JL. Kampung Baru Gondang, Kec. Tretep, Kab. Temanggung, Jawa Tengah</p>
+                    <p><i class="fas fa-id-card"></i> NPSN: 20364493</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MTs Safinatul Jabal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
