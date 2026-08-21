@@ -1,0 +1,157 @@
+/* Navbar Styles */
+.navbar {
+    background-color: var(--primary-green);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+}
+
+.school-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    gap: 0;
+    align-items: center;
+}
+
+.navbar-menu li {
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-menu a {
+    color: var(--white);
+    text-decoration: none;
+    padding: 0 15px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.navbar-menu a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.navbar-menu a.active {
+    background-color: rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+}
+
+.btn-login {
+    background-color: var(--primary-yellow) !important;
+    color: var(--text-dark) !important;
+    border-radius: 25px;
+    padding: 8px 20px !important;
+    margin: 0 10px;
+    height: auto !important;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #ffed4e !important;
+    transform: scale(1.05);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--white);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Responsive Mobile Menu */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .navbar-menu {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--primary-green);
+        flex-direction: column;
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .navbar-menu.active {
+        max-height: 400px;
+    }
+
+    .navbar-menu li {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-menu a {
+        padding: 15px 20px;
+        width: 100%;
+    }
+
+    .btn-login {
+        margin: 10px 20px !important;
+        width: calc(100% - 40px);
+        text-align: center;
+        height: auto !important;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(10px, 10px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+}
