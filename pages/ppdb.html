@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPDB - MTs Safinatul Jabal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, #0d5f2f 100%);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .content-section {
+            padding: 60px 20px;
+            background-color: var(--white);
+        }
+
+        .content-section h2 {
+            color: var(--primary-green);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary-green);
+            padding-bottom: 15px;
+        }
+
+        .ppdb-info {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .ppdb-info h3 {
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .ppdb-info p {
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .timeline {
+            display: grid;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-yellow);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(5px);
+        }
+
+        .timeline-date {
+            display: inline-block;
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .requirement-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--primary-green);
+            transition: transform 0.3s ease;
+        }
+
+        .requirement-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .requirement-card h4 {
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .requirement-card ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .requirement-card li {
+            color: var(--text-dark);
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .requirement-card li:last-child {
+            border-bottom: none;
+        }
+
+        .requirement-card li:before {
+            content: "✓ ";
+            color: var(--primary-green);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-green) 0%, #0d5f2f 100%);
+            color: var(--white);
+            padding: 50px 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .cta-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .btn-register {
+            display: inline-block;
+            background-color: var(--primary-yellow);
+            color: var(--text-dark);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-register:hover {
+            background-color: #ffed4e;
+            transform: scale(1.05);
+        }
+
+        .faq-section {
+            margin-top: 40px;
+        }
+
+        .faq-item {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            background-color: #e8e8e8;
+        }
+
+        .faq-question {
+            color: var(--primary-green);
+            font-weight: bold;
+            font-size: 1.05rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            color: var(--text-light);
+            margin-top: 10px;
+            display: none;
+            line-height: 1.8;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="../assets/logo.png" alt="Logo MTs" class="logo-img">
+                <span class="school-name">SIM MTs Safinatul Jabal</span>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="../index.html">Beranda</a></li>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="berita.html">Berita</a></li>
+                <li><a href="pengumuman.html">Pengumuman</a></li>
+                <li><a href="ppdb.html" class="active">PPDB</a></li>
+                <li><a href="galeri.html">Galeri</a></li>
+                <li><a href="prestasi.html">Prestasi</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+                <li><a href="login.html" class="btn-login">Login</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>PPDB 2024/2025</h1>
+        <p>Pendaftaran Peserta Didik Baru</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <section class="content-section">
+            <h2><i class="fas fa-graduation-cap"></i> Informasi PPDB</h2>
+            
+            <div class="ppdb-info">
+                <h3><i class="fas fa-info-circle"></i> Tentang PPDB MTs Safinatul Jabal</h3>
+                <p>Penerimaan Peserta Didik Baru (PPDB) MTs Safinatul Jabal tahun ajaran 2024/2025 telah dibuka. Kami mengundang calon siswa-siswi yang tertarik untuk bergabung dengan keluarga besar MTs Safinatul Jabal yang berkomitmen memberikan pendidikan berkualitas berbasis nilai-nilai Islam.</p>
+                <p><strong>Lokasi:</strong> JL. Kampung Baru Gondang, Kec. Tretep, Kab. Temanggung, Prov. Jawa Tengah</p>
+            </div>
+
+            <!-- Timeline -->
+            <h2 style="margin-top: 40px;"><i class="fas fa-calendar-alt"></i> Jadwal PPDB</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-date">1 - 31 Agustus 2024</span>
+                    <h4 class="timeline-title">Pendaftaran Online & Offline</h4>
+                    <p class="timeline-description">Calon siswa dapat mendaftar melalui website sekolah atau datang langsung ke sekolah dengan membawa dokumen yang diperlukan.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1 - 10 September 2024</span>
+                    <h4 class="timeline-title">Verifikasi Dokumen</h4>
+                    <p class="timeline-description">Tim PPDB akan melakukan verifikasi kelengkapan dan keaslian dokumen yang telah dikumpulkan oleh calon siswa.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">11 - 15 September 2024</span>
+                    <h4 class="timeline-title">Tes Tulis & Wawancara</h4>
+                    <p class="timeline-description">Calon siswa yang dinyatakan lolos verifikasi akan mengikuti tes tulis dan wawancara sesuai jadwal yang telah ditentukan.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">20 September 2024</span>
+                    <h4 class="timeline-title">Pengumuman Hasil PPDB</h4>
+                    <p class="timeline-description">Hasil seleksi PPDB akan diumumkan melalui website sekolah dan pengumuman langsung di sekolah.</p>
+                </div>
+            </div>
+
+            <!-- Persyaratan -->
+            <h2 style="margin-top: 40px;"><i class="fas fa-clipboard-list"></i> Persyaratan Pendaftaran</h2>
+            <div class="requirements-grid">
+                <div class="requirement-card">
+                    <h4><i class="fas fa-file-alt"></i> Dokumen Administratif</h4>
+                    <ul>
+                        <li>Ijazah atau Surat Keterangan Lulus</li>
+                        <li>Akta Kelahiran (fotokopi)</li>
+                        <li>Kartu Keluarga (fotokopi)</li>
+                        <li>Rapor Semester Terakhir</li>
+                    </ul>
+                </div>
+                <div class="requirement-card">
+                    <h4><i class="fas fa-health"></i> Kesehatan & Vaksinasi</h4>
+                    <ul>
+                        <li>Surat Keterangan Sehat</li>
+                        <li>Fotokopi Buku Kesehatan Anak</li>
+                        <li>Bukti Vaksinasi COVID-19</li>
+                        <li>Riwayat Penyakit (jika ada)</li>
+                    </ul>
+                </div>
+                <div class="requirement-card">
+                    <h4><i class="fas fa-user"></i> Data Pribadi</h4>
+                    <ul>
+                        <li>Pas Foto 3x4 (2 lembar)</li>
+                        <li>Formulir Pendaftaran</li>
+                        <li>Surat Pernyataan Orang Tua</li>
+                        <li>Data Kontak Orang Tua</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <h2 style="margin-top: 40px;"><i class="fas fa-question-circle"></i> Pertanyaan Umum (FAQ)</h2>
+            <div class="faq-section">
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>Apa syarat minimal untuk mendaftar PPDB?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Calon siswa harus memiliki ijazah SD/MI atau surat keterangan lulus, serta melengkapi semua dokumen yang telah ditentukan oleh sekolah. Tidak ada batasan nilai akademik minimal.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>Berapa biaya pendaftaran PPDB?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Biaya pendaftaran sebesar Rp. 100.000,- (seratus ribu rupiah). Biaya ini tidak dapat dikembalikan dan termasuk biaya pemrosesan dokumen dan administrasi.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>Kapan pengumuman hasil seleksi PPDB?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Pengumuman hasil seleksi PPDB akan diumumkan pada tanggal 20 September 2024 melalui website sekolah dan dapat dicek langsung di kantor sekolah.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>Apakah ada beasiswa untuk siswa berprestasi?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Ya, MTs Safinatul Jabal menyediakan beasiswa untuk siswa yang berprestasi akademik maupun non-akademik. Informasi lebih lanjut dapat diperoleh saat pendaftaran atau menghubungi kantor sekolah.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>Bagaimana cara mendaftar secara online?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Calon siswa dapat mengakses halaman pendaftaran di website ini, mengisi formulir dengan lengkap, kemudian mengunggah dokumen yang diperlukan. Setelah itu, lakukan pembayaran biaya pendaftaran melalui transfer bank.
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h3>Siap Bergabung?</h3>
+                <p>Daftarkan diri Anda sekarang dan jadilah bagian dari keluarga besar MTs Safinatul Jabal!</p>
+                <button class="btn-register" onclick="alert('Sistem pendaftaran online akan segera diluncurkan. Hubungi sekolah untuk informasi lebih lanjut.')">
+                    <i class="fas fa-edit"></i> Daftar Sekarang
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MTs Safinatul Jabal</h3>
+                    <p>Madrasah Tsanawiyah dengan komitmen memberikan pendidikan berkualitas berbasis nilai Islam</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Menu Cepat</h3>
+                    <ul>
+                        <li><a href="profil.html">Profil</a></li>
+                        <li><a href="ppdb.html">PPDB</a></li>
+                        <li><a href="kontak.html">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Kontak PPDB</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> JL. Kampung Baru Gondang, Kec. Tretep, Kab. Temanggung, Jawa Tengah</p>
+                    <p><i class="fas fa-phone"></i> Hubungi Panitia PPDB</p>
+                    <p><i class="fas fa-id-card"></i> NPSN: 20364493</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MTs Safinatul Jabal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        function toggleFaq(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
